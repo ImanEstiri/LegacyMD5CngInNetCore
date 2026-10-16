@@ -1,36 +1,33 @@
 # LegacyMD5CngInNetCore
 
-🛠️ MD5Cng for .NET Core/5+ (Linux/macOS)
+A cross-platform compatibility library for legacy .NET applications that need MD5 hashing on modern .NET runtimes.
 
-*A cross-platform workaround to generate MD5 hashes using CNG-like behavior in modern .NET non-Windows environments.*
+## 🛠️ Overview
 
+`LegacyMD5CngInNetCore` aims to simplify the migration of legacy applications that rely on the `MD5Cng` API to modern .NET environments, including Linux, macOS, and Docker containers.
 
-🚀 Why This Exists
+It provides an alternative approach to generating MD5 hashes on platforms where the Windows-specific `MD5Cng` implementation is unavailable, while helping preserve compatibility with existing hashing workflows.
 
-Microsoft removed MD5Cng from .NET Core/5+ and restricted it to Windows-only frameworks. This library fills the gap, enabling legacy systems or niche workflows (e.g., FIPS-compliant toolchains, backward-compatible integrations) to use MD5Cng-style hashing on Linux, macOS, and Docker with .NET 6/7/8.
+## 🚀 Key Features
 
+- **Cross-Platform Support:** Designed for Linux, macOS, and containerized environments.
+- **Modern .NET Compatibility:** Intended for applications targeting modern .NET versions, including .NET 6, 7, and 8.
+- **Legacy Integration:** Helps reduce changes when migrating applications that depend on the legacy `MD5Cng` API.
+- **Native Cryptography Support:** Relies on the cryptographic capabilities available through the underlying .NET runtime and platform.
 
-💡 Key Features
+## 📦 Use Cases
 
-✅ Cross-Platform MD5Cng Emulation: Mimic the deprecated MD5Cng API on non-Windows systems.
+- Migrating legacy applications from .NET Framework to modern .NET.
+- Maintaining compatibility with systems that require MD5-based checksums.
+- Supporting legacy integrations that depend on existing MD5 hashing behavior.
+- Testing and debugging cross-platform applications that use MD5.
 
-✅ CNG-like Behavior: Uses platform-native cryptography libraries (e.g., OpenSSL) under the hood.
+## ⚠️ Security Considerations
 
-✅ No Windows Dependencies: Works seamlessly in Linux/macOS CI/CD pipelines or containers.
+- **MD5 is cryptographically broken.** Do not use it for passwords, digital signatures, or security-sensitive integrity verification.
+- **Not FIPS-compliant by default.** Using MD5 does not provide FIPS compliance, regardless of the underlying platform or implementation.
+- **Compatibility is not guaranteed.** Verify hash outputs and platform behavior against your existing implementation before deploying to production.
 
-✅ Legacy Compatibility: Migrate old .NET Framework codebases to modern .NET without rewriting hashing logic.
+## 🎯 Goal
 
-
-📜 Use Cases
-
-Migrate enterprise apps relying on MD5Cng to .NET 8.
-
-Maintain compatibility with legacy systems that require MD5 (e.g., checksums for non-security-critical tasks).
-
-Debug/test FIPS-mode workflows in cross-platform environments.
-
-
-⚠️ Caveats
-
-MD5 is Insecure: Only use this for non-cryptographic purposes (e.g., checksums, legacy integrations).
-Not FIPS-Compliant: Mimics MD5Cng’s behavior but does not enforce FIPS rules.
+Provide a practical migration path for legacy .NET applications that need to preserve MD5-based compatibility while moving to modern, cross-platform runtimes.
